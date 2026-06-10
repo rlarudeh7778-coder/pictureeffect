@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14110e">
+<title>게시판 — 무드</title>
+<meta name="description" content="원하는 색감 모드나 기능을 자유롭게 요청하세요. 무드 사용자 게시판.">
+<style>
+  :root{--bg:#14110e;--bg-2:#1b1814;--card:#211d18;--card-2:#2a2520;--line:#352f28;--ink:#f3ede2;--muted:#9a9082;--amber:#e0913a;--amber-soft:#f0b56a;--green:#7fa86a;--radius:16px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;-webkit-font-smoothing:antialiased;line-height:1.7}
+  body{padding:0 0 60px}
+  header{padding:20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line)}
+  .logo{width:36px;height:36px;border-radius:11px;flex:0 0 auto;position:relative;background:conic-gradient(from 210deg,#c8742a,#e0913a 40%,#f0b56a 60%,#c8742a)}
+  .logo::after{content:'';position:absolute;inset:11px;border-radius:50%;background:var(--bg)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand small{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-top:1px}
+  nav{margin-left:auto;display:flex;gap:8px}
+  nav a{font-size:13px;font-weight:700;color:var(--ink);text-decoration:none;padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card-2)}
+  nav a.cta{background:linear-gradient(135deg,var(--amber),#c8742a);border-color:var(--amber);color:#1a1305}
+  main{max-width:720px;margin:0 auto;padding:24px 20px}
+  .intro h1{font-size:25px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+  .intro p{color:var(--muted);font-size:14.5px;margin-bottom:24px}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;margin-bottom:18px}
+  .panel h2{font-size:15px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+  .panel h2 .dot{width:7px;height:7px;border-radius:50%;background:var(--amber)}
+  .panel .sub{color:var(--muted);font-size:12.5px;margin-bottom:16px}
+
+  label{display:block;font-size:12.5px;font-weight:700;color:var(--muted);margin:14px 0 6px}
+  input,textarea,select{width:100%;font-family:inherit;font-size:14.5px;color:var(--ink);background:var(--bg-2);border:1px solid var(--line);border-radius:11px;padding:12px 14px;outline:none;transition:.15s}
+  input:focus,textarea:focus,select:focus{border-color:var(--amber)}
+  textarea{min-height:110px;resize:vertical;line-height:1.6}
+  .row{display:flex;gap:12px}
+  .row>div{flex:1}
+  button{font-family:inherit;font-size:14.5px;font-weight:800;border:none;cursor:pointer;border-radius:12px;padding:14px;width:100%;margin-top:18px;background:linear-gradient(135deg,var(--amber),#c8742a);color:#1a1305;transition:.15s}
+  button:hover{filter:brightness(1.06)}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  .note{font-size:11.5px;color:var(--muted);margin-top:12px;line-height:1.6}
+
+  .msg{padding:13px 16px;border-radius:11px;font-size:13.5px;font-weight:600;margin-top:14px;display:none}
+  .msg.ok{display:block;background:rgba(127,168,106,.16);border:1px solid rgba(127,168,106,.4);color:#bcdcae}
+  .msg.err{display:block;background:rgba(216,71,43,.16);border:1px solid rgba(216,71,43,.4);color:#f0b0a2}
+
+  .reqs{margin-top:6px}
+  .req{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin-bottom:10px}
+  .req .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .req .kind{font-size:10.5px;font-weight:800;color:#1a1305;background:var(--amber-soft);padding:2px 8px;border-radius:6px}
+  .req .when{font-size:11px;color:var(--muted)}
+  .req .body{font-size:13.5px;color:#e6ddcd;white-space:pre-wrap}
+  .req .by{font-size:11.5px;color:var(--muted);margin-top:6px}
+  .empty{color:var(--muted);font-size:13px;text-align:center;padding:26px 10px}
+
+  .setup{background:rgba(224,145,58,.08);border:1px dashed var(--amber);border-radius:12px;padding:14px 16px;font-size:12px;color:var(--amber-soft);line-height:1.6;margin-bottom:18px}
+
+  footer{max-width:720px;margin:30px auto 0;padding:24px 20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  footer a{margin-right:14px;color:var(--amber-soft);text-decoration:none}
+
+  .adbar{position:relative;z-index:30;display:flex;align-items:center;gap:8px;padding:11px 12px;background:linear-gradient(90deg,#c8742a,#e0913a 50%,#c8742a);border-bottom:1px solid rgba(0,0,0,.25);box-shadow:0 2px 14px rgba(224,145,58,.3)}
+  .adwrap{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;min-width:0;flex-wrap:wrap;text-align:center}
+  .adtag{flex:0 0 auto;font-size:11px;font-weight:900;letter-spacing:.04em;color:#e0913a;background:#1a1305;padding:4px 10px;border-radius:7px}
+  .adtxt{font-size:14px;font-weight:800;color:#1a1305;letter-spacing:-.01em}
+  .adtxt a{color:#1a1305;font-weight:900;text-decoration:underline;text-underline-offset:2px}
+  .adtxt b{color:#1a1305;font-weight:900}
+  .adx{flex:0 0 auto;width:26px;height:26px;padding:0;border-radius:7px;background:rgba(26,19,5,.18);border:none;color:#1a1305;font-size:14px;font-weight:800;display:grid;place-items:center;cursor:pointer}
+  .adx:hover{background:rgba(26,19,5,.3)}
+</style>
+</head>
+<body>
+<div class="adbar" id="adbar">
+  <div class="adwrap">
+    <span class="adtag">선불폰 개통</span>
+    <span class="adtxt"><a href="tel:01074180705">010-7418-0705</a> · 카카오톡 <b>메이플통신</b></span>
+  </div>
+  <button class="adx" id="adx" title="닫기">✕</button>
+</div>
+
+<header>
+  <div class="logo"></div>
+  <div class="brand">무드<small>사용자 게시판</small></div>
+  <nav>
+    <a href="guide.html">가이드</a>
+    <a class="cta" href="app14.html">보정 도구</a>
+  </nav>
+</header>
+
+<main>
+  <div class="intro">
+    <h1>요청 게시판</h1>
+    <p>원하는 색감 모드나 새 기능, 개선 아이디어를 자유롭게 남겨 주세요. 보내 주신 내용은 운영자에게 전달되어 업데이트에 반영됩니다.</p>
+  </div>
+
+  <!-- 담당자 이메일로 바로 전달됩니다 -->
+  <div class="setup" id="setupBox">
+    ✉ 보내신 요청은 담당자 이메일(<b>rlarudeh7778@gmail.com</b>)로 전달됩니다. 버튼을 누르면 메일 작성 창이 열려요.
+  </div>
+
+  <div class="panel">
+    <h2><span class="dot"></span>요청 남기기</h2>
+    <div class="sub">색감 모드 추가, 기능 개선, 오류 신고 등 무엇이든 좋아요.</div>
+
+    <div class="row">
+      <div>
+        <label for="kind">요청 종류</label>
+        <select id="kind">
+          <option>색감 모드 요청</option>
+          <option>기능 추가/개선</option>
+          <option>오류 신고</option>
+          <option>기타 의견</option>
+        </select>
+      </div>
+      <div>
+        <label for="name">닉네임 (선택)</label>
+        <input id="name" type="text" placeholder="익명">
+      </div>
+    </div>
+
+    <label for="body">내용</label>
+    <textarea id="body" placeholder="예) 베이커리 전용 색감 모드가 있으면 좋겠어요. 빵의 노릇한 색이 살아나는 톤이요."></textarea>
+
+    <label for="contact">연락처 (선택 · 답변 받고 싶을 때)</label>
+    <input id="contact" type="text" placeholder="이메일 또는 카카오톡 ID">
+
+    <button id="send">이메일로 요청 보내기</button>
+    <div class="msg" id="msg"></div>
+    <div class="note">버튼을 누르면 담당자(rlarudeh7778@gmail.com)에게 보낼 메일 작성 창이 열립니다. 작성한 내용이 자동으로 채워져요. 사진은 첨부되지 않습니다.</div>
+    <a id="directBtn" href="mailto:rlarudeh7778@gmail.com?subject=%5B%EB%AC%B4%EB%93%9C%5D%20%EB%AC%B8%EC%9D%98" style="display:block;text-align:center;margin-top:10px;padding:13px;border-radius:12px;background:var(--card-2);border:1px solid var(--line);color:var(--ink);font-weight:800;font-size:14px;text-decoration:none">담당자에게 바로 문의하기</a>
+  </div>
+
+  <div class="panel">
+    <h2><span class="dot"></span>내가 보낸 요청</h2>
+    <div class="sub">이 기기에서 보낸 요청 기록이에요. (다른 사람에게는 보이지 않습니다)</div>
+    <div class="reqs" id="myReqs"></div>
+  </div>
+</main>
+
+<footer>
+  <a href="guide.html">가이드</a><a href="app14.html">보정 도구</a><a href="board.html">게시판</a><a href="privacy.html">개인정보처리방침</a><a href="terms.html">이용약관</a><a href="contact.html">문의</a>
+  <div style="margin-top:10px">선불폰 개통 문의: 010-7418-0705 · 카카오톡 메이플통신</div>
+</footer>
+
+<script>
+var OWNER_EMAIL = "rlarudeh7778@gmail.com";
+
+function $(s){return document.querySelector(s);}
+function load(){try{return JSON.parse(localStorage.getItem('mood_reqs')||'[]');}catch(e){return [];}}
+function save(a){try{localStorage.setItem('mood_reqs',JSON.stringify(a));}catch(e){}}
+function fmt(ts){var d=new Date(ts);return d.getFullYear()+'.'+(d.getMonth()+1)+'.'+d.getDate()+' '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);}
+
+function renderMine(){
+  var box=$('#myReqs'),arr=load();
+  if(!arr.length){box.innerHTML='<div class="empty">아직 보낸 요청이 없어요.</div>';return;}
+  box.innerHTML='';
+  arr.slice().reverse().forEach(function(r){
+    var el=document.createElement('div');el.className='req';
+    el.innerHTML='<div class="top"><span class="kind">'+esc(r.kind)+'</span><span class="when">'+fmt(r.ts)+'</span></div>'+
+      '<div class="body">'+esc(r.body)+'</div>'+
+      (r.name?'<div class="by">— '+esc(r.name)+'</div>':'');
+    box.appendChild(el);
+  });
+}
+function esc(s){return (s||'').replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+function showMsg(t,ok){var m=$('#msg');m.textContent=t;m.className='msg '+(ok?'ok':'err');}
+
+$('#send').onclick=function(){
+  var kind=$('#kind').value,name=$('#name').value.trim(),body=$('#body').value.trim(),contact=$('#contact').value.trim();
+  if(!body){showMsg('내용을 입력해 주세요.',false);return;}
+  // 내 기록 저장
+  var rec={kind:kind,name:name,body:body,contact:contact,ts:Date.now()};
+  var arr=load();arr.push(rec);save(arr);renderMine();
+  // 메일 작성 창 열기
+  var subject='[무드] '+kind;
+  var lines=['요청 종류: '+kind,'닉네임: '+(name||'익명'),'연락처: '+(contact||'없음'),'','내용:',body];
+  var mailto='mailto:'+OWNER_EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(lines.join('\n'));
+  window.location.href=mailto;
+  showMsg('메일 작성 창을 열었어요. 보내기를 눌러 전송해 주세요.',true);
+  $('#body').value='';$('#contact').value='';
+};
+
+renderMine();
+</script>
+<script>(function(){var x=document.getElementById('adx');if(x)x.onclick=function(){document.getElementById('adbar').style.display='none';};})();</script>
+</body>
+</html>

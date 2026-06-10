@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14110e">
+<title>사진 색감 보정 가이드 — 무드</title>
+<meta name="description" content="음식, 카페, 풀빌라, 야경 사진을 더 먹음직스럽고 분위기 있게 보정하는 색감 가이드. 자영업자와 블로거를 위한 실전 사진 보정 팁을 정리했습니다.">
+<style>
+  :root{--bg:#14110e;--bg-2:#1b1814;--card:#211d18;--card-2:#2a2520;--line:#352f28;--ink:#f3ede2;--muted:#9a9082;--amber:#e0913a;--amber-soft:#f0b56a;--radius:16px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;-webkit-font-smoothing:antialiased;line-height:1.75}
+  body{padding:0 0 60px}
+  header{padding:22px 20px 18px;display:flex;align-items:center;gap:13px;border-bottom:1px solid var(--line);position:sticky;top:0;background:linear-gradient(180deg,var(--bg) 75%,rgba(20,17,14,.6));backdrop-filter:blur(8px);z-index:20}
+  .logo{width:38px;height:38px;border-radius:11px;flex:0 0 auto;position:relative;background:conic-gradient(from 210deg,#c8742a,#e0913a 40%,#f0b56a 60%,#c8742a);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 0 22px rgba(224,145,58,.26)}
+  .logo::after{content:'';position:absolute;inset:11px;border-radius:50%;background:var(--bg)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand small{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-top:2px}
+  nav{margin-left:auto;display:flex;gap:8px}
+  nav a{font-size:13px;font-weight:700;color:var(--ink);text-decoration:none;padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card-2)}
+  nav a.cta{background:linear-gradient(135deg,var(--amber),#c8742a);border-color:var(--amber);color:#1a1305}
+  main{max-width:760px;margin:0 auto;padding:26px 20px}
+  .hero{margin-bottom:34px}
+  .hero h1{font-size:27px;font-weight:800;letter-spacing:-.03em;line-height:1.3;margin-bottom:12px}
+  .hero p{color:var(--muted);font-size:15px}
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:34px}
+  .toc h2{font-size:13px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--amber);margin-bottom:12px}
+  .toc ol{list-style:none;counter-reset:t}
+  .toc li{counter-increment:t;margin:9px 0}
+  .toc a{color:var(--ink);text-decoration:none;font-size:15px;font-weight:600;display:flex;gap:11px;align-items:baseline}
+  .toc a:hover{color:var(--amber-soft)}
+  .toc a::before{content:counter(t,decimal-leading-zero);color:var(--amber);font-weight:800;font-size:12px;flex:0 0 auto}
+  article{margin-bottom:46px;scroll-margin-top:80px}
+  article h2{font-size:21px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px;line-height:1.35}
+  article .eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:7px}
+  article p{margin:14px 0;font-size:15.5px;color:#e6ddcd}
+  article h3{font-size:16.5px;font-weight:800;margin:24px 0 4px}
+  article ul{margin:12px 0 12px 4px;list-style:none}
+  article ul li{position:relative;padding-left:20px;margin:8px 0;font-size:15px;color:#e6ddcd}
+  article ul li::before{content:'';position:absolute;left:3px;top:10px;width:6px;height:6px;border-radius:2px;background:var(--amber)}
+  article .callout{background:var(--bg-2);border-left:3px solid var(--amber);border-radius:0 12px 12px 0;padding:14px 18px;margin:20px 0;font-size:14.5px;color:#e6ddcd}
+  .divider{height:1px;background:var(--line);margin:38px 0}
+  .try{background:linear-gradient(135deg,#2a2014,#241a10);border:1px solid var(--line);border-radius:var(--radius);padding:24px;text-align:center;margin:40px 0}
+  .try h3{font-size:18px;font-weight:800;margin-bottom:8px}
+  .try p{color:var(--muted);font-size:14px;margin-bottom:16px}
+  .try a{display:inline-block;background:linear-gradient(135deg,var(--amber),#c8742a);color:#1a1305;font-weight:800;font-size:15px;text-decoration:none;padding:13px 26px;border-radius:12px}
+  footer{max-width:760px;margin:0 auto;padding:30px 20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;line-height:1.9}
+  footer a{color:var(--amber-soft);text-decoration:none}
+  footer .links{margin-bottom:10px}
+  footer .links a{margin-right:16px}
+
+  .adbar{position:relative;z-index:30;display:flex;align-items:center;gap:8px;padding:11px 12px;background:linear-gradient(90deg,#c8742a,#e0913a 50%,#c8742a);border-bottom:1px solid rgba(0,0,0,.25);box-shadow:0 2px 14px rgba(224,145,58,.3)}
+  .adwrap{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;min-width:0;flex-wrap:wrap;text-align:center}
+  .adtag{flex:0 0 auto;font-size:11px;font-weight:900;letter-spacing:.04em;color:#e0913a;background:#1a1305;padding:4px 10px;border-radius:7px}
+  .adtxt{font-size:14px;font-weight:800;color:#1a1305;letter-spacing:-.01em}
+  .adtxt a{color:#1a1305;font-weight:900;text-decoration:underline;text-underline-offset:2px}
+  .adtxt b{color:#1a1305;font-weight:900}
+  .adx{flex:0 0 auto;width:26px;height:26px;padding:0;border-radius:7px;background:rgba(26,19,5,.18);border:none;color:#1a1305;font-size:14px;font-weight:800;display:grid;place-items:center;cursor:pointer}
+  .adx:hover{background:rgba(26,19,5,.3)}
+</style>
+</head>
+<body>
+<div class="adbar" id="adbar">
+  <div class="adwrap">
+    <span class="adtag">선불폰 개통</span>
+    <span class="adtxt"><a href="tel:01074180705">010-7418-0705</a> · 카카오톡 <b>메이플통신</b></span>
+  </div>
+  <button class="adx" id="adx" title="닫기">✕</button>
+</div>
+
+<header>
+  <div class="logo"></div>
+  <div class="brand">무드<small>사진 색감 보정 가이드</small></div>
+  <nav>
+    <a href="guide.html">가이드</a>
+    <a class="cta" href="app14.html">보정 도구 열기</a>
+  </nav>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>음식·카페·여행 사진,<br>색감 하나로 완전히 달라집니다</h1>
+    <p>매장을 운영하거나 SNS에 사진을 올리는 분들을 위한 색감 보정 가이드입니다. 비싼 장비나 전문 프로그램 없이, 같은 사진을 더 먹음직스럽고 분위기 있게 만드는 방법을 상황별로 정리했습니다.</p>
+  </div>
+
+  <div class="toc">
+    <h2>목차</h2>
+    <ol>
+      <li><a href="#basics">색감 보정이 매출까지 바꾸는 이유</a></li>
+      <li><a href="#food">음식 사진을 먹음직스럽게 만드는 법</a></li>
+      <li><a href="#cafe">카페 사진의 밝고 따뜻한 톤 만들기</a></li>
+      <li><a href="#villa">풀빌라·펜션 사진을 시원하게 살리는 법</a></li>
+      <li><a href="#night">야경 사진을 깊고 분위기 있게 보정하기</a></li>
+      <li><a href="#focus">아웃포커싱으로 주제를 강조하는 법</a></li>
+    </ol>
+  </div>
+
+  <article id="basics">
+    <div class="eyebrow">기본기</div>
+    <h2>색감 보정이 매출까지 바꾸는 이유</h2>
+    <p>같은 메뉴, 같은 공간을 찍어도 어떤 사진은 손님을 부르고 어떤 사진은 그냥 지나칩니다. 차이는 대부분 색감에서 갈립니다. 사람은 음식이나 공간을 볼 때 색을 먼저 읽습니다. 국물의 붉은 기, 고기의 윤기, 카페의 따뜻한 햇살, 이런 색의 인상이 "맛있겠다", "가고 싶다"는 감정을 즉각 만들어냅니다.</p>
+    <p>그런데 휴대폰 카메라는 눈으로 본 것보다 색을 밋밋하게 담는 경우가 많습니다. 실내조명 아래에서는 음식이 누렇게 뜨고, 흐린 날에는 공간이 칙칙해 보입니다. 보정은 이 간극을 메우는 작업입니다. 없는 것을 지어내는 게 아니라, 실제로 봤던 그 인상에 가깝게 되돌리는 일에 가깝습니다.</p>
+    <h3>보정의 핵심은 네 가지</h3>
+    <p>복잡해 보여도 실제로 만지는 건 몇 가지뿐입니다. 밝기를 맞춰 적정 노출을 만들고, 대비로 입체감을 주고, 색온도로 따뜻하거나 시원한 분위기를 정하고, 채도로 색의 선명함을 조절합니다. 이 네 가지만 손에 익혀도 사진의 인상이 크게 달라집니다.</p>
+    <ul>
+      <li>밝기(노출): 너무 어둡거나 밝지 않게 적정 수준으로</li>
+      <li>대비: 밝은 곳과 어두운 곳의 차이로 입체감을 부여</li>
+      <li>색온도: 따뜻함(음식·카페)과 시원함(풀빌라·하늘)을 결정</li>
+      <li>채도: 색을 선명하게, 단 과하면 인공적으로 보이니 주의</li>
+    </ul>
+    <div class="callout">처음에는 슬라이더를 크게 움직여 변화를 확인하고, 익숙해지면 미세하게 조절하세요. 보정은 "원본보다 자연스럽게 좋아 보이는" 선에서 멈추는 것이 가장 좋습니다.</div>
+  </article>
+
+  <div class="divider"></div>
+
+  <article id="food">
+    <div class="eyebrow">음식 사진</div>
+    <h2>음식 사진을 먹음직스럽게 만드는 법</h2>
+    <p>음식 사진에서 가장 중요한 것은 "먹음직스러움"입니다. 이 느낌은 대부분 따뜻한 색감과 적당한 진하기에서 나옵니다. 특히 한식처럼 국물과 양념이 있는 음식은 붉은 기와 윤기가 살아야 군침이 돕니다.</p>
+    <h3>어두운 배경에 음식을 띄우기</h3>
+    <p>맛집 느낌을 내려면 배경을 살짝 어둡게 가라앉히고 음식만 도드라지게 만드는 것이 효과적입니다. 검정 영역을 눌러 배경의 잡다한 부분을 정리하면, 자연스럽게 시선이 음식으로 모입니다. 대비를 올리면 고기의 결, 국물의 윤기 같은 디테일이 살아납니다.</p>
+    <h3>붉은색과 노란색을 살리기</h3>
+    <p>김치, 고추장 양념, 찌개 국물의 붉은 기는 음식 사진의 식욕을 좌우합니다. 빨강 계열의 채도를 올리면 이 부분이 진하고 먹음직스러워집니다. 노릇하게 익은 고기나 전, 튀김은 노란빛을 살짝 강조하면 더 고소해 보입니다. 다만 전체 채도를 무작정 높이면 접시나 반찬까지 과하게 물들어 인공적으로 보이므로, 색깔별로 조절하는 편이 자연스럽습니다.</p>
+    <div class="callout">실내조명에서 찍은 음식이 누렇게 떴다면 색온도를 살짝 시원한 쪽으로 내려 균형을 잡고, 그다음 붉은 양념만 따로 살리면 깔끔합니다.</div>
+    <p>무드의 "한식맛집" 모드는 이런 원리를 미리 적용해 둔 색감입니다. 어두운 배경, 진한 대비, 살아나는 붉은 양념을 한 번에 적용해 줍니다.</p>
+  </article>
+
+  <div class="divider"></div>
+
+  <article id="cafe">
+    <div class="eyebrow">카페 사진</div>
+    <h2>카페 사진의 밝고 따뜻한 톤 만들기</h2>
+    <p>카페 사진은 음식 사진과 정반대 방향입니다. 어둡고 진한 톤보다, 밝고 화사하고 따뜻한 분위기가 어울립니다. 창가의 자연광, 우드 톤 가구, 라떼의 크림색이 만들어내는 편안함이 카페의 매력이기 때문입니다.</p>
+    <h3>밝게, 그러나 날아가지 않게</h3>
+    <p>카페 사진은 노출을 살짝 올려 전체를 환하게 만드는 것이 기본입니다. 다만 창가의 밝은 부분이 하얗게 날아가면 디테일이 사라지므로, 하이라이트는 조금 눌러 주는 것이 좋습니다. 그림자를 살짝 들어 올리면 어두운 구석까지 부드럽게 보여 공간이 넓고 쾌적해 보입니다.</p>
+    <h3>따뜻함은 더하되 과하지 않게</h3>
+    <p>색온도를 따뜻한 쪽으로 살짝 올리면 햇살이 든 듯한 아늑함이 생깁니다. 채도는 음식 사진만큼 높일 필요가 없습니다. 오히려 약간 차분한 편이 감성적인 카페 무드에 어울립니다. 대비도 부드럽게 두어 전체적으로 말랑한 느낌을 주는 것이 좋습니다.</p>
+    <div class="callout">디저트와 음료가 함께 있는 사진이라면, 음식 사진의 원리를 살짝 섞어 디저트 부분만 조금 더 선명하게 살리면 균형이 좋습니다.</div>
+    <p>무드의 "카페" 모드는 밝고 따뜻하며 채도가 과하지 않은 이 톤을 기본값으로 제공합니다.</p>
+  </article>
+
+  <div class="divider"></div>
+
+  <article id="villa">
+    <div class="eyebrow">풀빌라·펜션</div>
+    <h2>풀빌라·펜션 사진을 시원하게 살리는 법</h2>
+    <p>풀빌라나 펜션 사진의 매력은 청량함입니다. 파란 수영장 물, 맑은 하늘, 푸른 잔디가 만들어내는 시원한 인상이 "여기서 쉬고 싶다"는 마음을 부릅니다. 그래서 보정 방향도 따뜻함보다 시원함과 선명함에 둡니다.</p>
+    <h3>파랑과 초록을 또렷하게</h3>
+    <p>수영장 물과 하늘의 파랑, 잔디의 초록이 핵심입니다. 색온도를 살짝 시원한 쪽으로 내리면 물과 하늘이 더 맑아 보입니다. 초록 계열의 채도를 올리면 잔디가 생기 있게 살아납니다. 전체적으로 채도와 선명도를 적당히 높여 쨍한 여름 휴양지 느낌을 만듭니다.</p>
+    <h3>밝고 깨끗하게</h3>
+    <p>휴양지 사진은 밝고 깨끗할수록 좋습니다. 노출을 살짝 올리고 그림자를 들어 올려 그늘진 부분까지 시원하게 보여 줍니다. 다만 흰 외벽이나 밝은 데크가 날아가지 않도록 하이라이트는 조절합니다. 가장자리를 살짝 어둡게 하는 비네팅을 약하게 주면 시선이 중앙으로 모여 공간이 정돈돼 보입니다.</p>
+    <div class="callout">실내 객실 사진은 풀빌라 야외 사진보다 따뜻한 편이 아늑해 보입니다. 같은 펜션이라도 야외는 시원하게, 실내는 살짝 따뜻하게 나누면 좋습니다.</div>
+    <p>무드의 "풀빌라" 모드는 시원한 색온도와 선명한 파랑·초록을 살린 청량한 톤을 기본으로 제공합니다.</p>
+  </article>
+
+  <div class="divider"></div>
+
+  <article id="night">
+    <div class="eyebrow">야경</div>
+    <h2>야경 사진을 깊고 분위기 있게 보정하기</h2>
+    <p>야경은 어둠을 어떻게 다루느냐가 전부입니다. 무작정 밝게 만들면 분위기가 사라지고 노이즈만 도드라집니다. 좋은 야경 보정은 어두운 부분은 깊게 가라앉히되, 불빛과 노을은 또렷하게 살리는 것입니다.</p>
+    <h3>그림자는 깊게, 불빛은 따뜻하게</h3>
+    <p>야경 사진의 매력은 차가운 어둠과 따뜻한 불빛의 대비에 있습니다. 검정 영역을 눌러 하늘과 그늘을 깊게 만들면 별이나 도시의 윤곽이 또렷해집니다. 반대로 건물 창문의 불빛, 가로등, 노을은 따뜻하고 살짝 밝게 살려 주면 반짝이는 느낌이 납니다. 이 두 방향을 동시에 잡는 것이 야경 보정의 핵심입니다.</p>
+    <h3>채도는 적당히, 선명도로 디테일을</h3>
+    <p>야경은 채도를 과하게 올리면 불빛이 번지고 지저분해 보입니다. 채도는 차분하게 두고, 대신 선명도와 부분 대비를 살짝 올려 건물의 윤곽과 불빛의 점을 또렷하게 만드는 편이 깔끔합니다. 가장자리를 어둡게 하는 비네팅을 주면 도시의 불빛이 더 집중돼 보입니다.</p>
+    <div class="callout">간판이나 매장 외관을 밤에 찍을 때도 같은 원리가 통합니다. 주변 어둠을 눌러 간판 불빛만 또렷하게 살리면 눈에 확 들어옵니다.</div>
+    <p>무드의 "야경" 모드는 깊은 어둠과 따뜻한 불빛의 대비를 살린 도시 야경 톤을 기본으로 제공합니다.</p>
+  </article>
+
+  <div class="divider"></div>
+
+  <article id="focus">
+    <div class="eyebrow">아웃포커싱</div>
+    <h2>아웃포커싱으로 주제를 강조하는 법</h2>
+    <p>아웃포커싱은 강조하고 싶은 부분만 선명하게 두고 배경을 흐리게 만드는 기법입니다. 음식 한 접시, 간판 하나, 디저트 하나에 시선을 집중시키고 싶을 때 효과적입니다. 고급 카메라의 얕은 심도를 흉내 내는 셈입니다.</p>
+    <h3>무엇을 강조할지 먼저 정하기</h3>
+    <p>아웃포커싱의 시작은 "이 사진에서 가장 보여 주고 싶은 것"을 정하는 일입니다. 대표 메뉴라면 그 접시, 매장 홍보라면 간판, 디저트 신메뉴라면 그 케이크입니다. 강조할 대상을 정하면 나머지는 과감하게 흐려도 됩니다. 오히려 배경이 정리되어 주제가 또렷해집니다.</p>
+    <h3>강조 영역과 흐림 정도 조절</h3>
+    <p>강조 영역이 너무 작으면 답답하고, 너무 크면 효과가 약합니다. 주제가 자연스럽게 들어가는 정도로 영역을 잡는 것이 좋습니다. 흐림 강도는 상황에 따라 다릅니다. 배경이 지저분하면 강하게, 배경도 어느 정도 보여 주고 싶으면 약하게 조절합니다. 경계가 너무 또렷하면 인공적으로 보이므로, 가장자리가 부드럽게 번지도록 두는 편이 자연스럽습니다.</p>
+    <div class="callout">색감 보정과 아웃포커싱을 함께 쓰면 효과가 커집니다. 먼저 색감으로 분위기를 잡고, 그다음 아웃포커싱으로 주제를 강조하면 전문적인 느낌의 사진이 됩니다.</div>
+    <p>무드의 아웃포커싱 도구는 강조할 영역을 손가락으로 끌어 옮기고 모서리로 크기를 조절할 수 있어, 음식이나 간판처럼 네모난 주제를 쉽게 강조할 수 있습니다.</p>
+  </article>
+
+  <div class="try">
+    <h3>이제 직접 보정해 보세요</h3>
+    <p>위에서 설명한 색감과 아웃포커싱을 버튼 한 번으로 적용할 수 있습니다.</p>
+    <a href="app14.html">무드 보정 도구 열기</a>
+  </div>
+</main>
+
+<footer>
+  <div class="links">
+    <a href="guide.html">가이드</a>
+    <a href="app14.html">보정 도구</a>
+    <a href="board.html">게시판</a>
+    <a href="privacy.html">개인정보처리방침</a>
+    <a href="terms.html">이용약관</a>
+    <a href="contact.html">문의</a>
+  </div>
+  무드(Mood)는 음식·카페·여행 사진을 위한 색감 보정 도구입니다. 모든 사진은 사용자의 기기 안에서만 처리되며 외부로 전송되지 않습니다.<br>
+  선불폰 개통 문의: 010-7418-0705 · 카카오톡 메이플통신
+</footer>
+<script>(function(){var x=document.getElementById('adx');if(x)x.onclick=function(){document.getElementById('adbar').style.display='none';};})();</script>
+</body>
+</html>

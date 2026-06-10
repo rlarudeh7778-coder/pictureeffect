@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14110e">
+<title>무드 — 사진 색감 보정 도구 & 가이드</title>
+<meta name="description" content="음식·카페·풀빌라·야경 사진을 더 먹음직스럽고 분위기 있게. 무료 색감 보정 도구와 실전 사진 보정 가이드.">
+<style>
+  :root{--bg:#14110e;--bg-2:#1b1814;--card:#211d18;--card-2:#2a2520;--line:#352f28;--ink:#f3ede2;--muted:#9a9082;--amber:#e0913a;--amber-soft:#f0b56a;--radius:16px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;-webkit-font-smoothing:antialiased;line-height:1.7}
+  body{padding:0 0 50px}
+  header{padding:20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--line);position:sticky;top:0;background:linear-gradient(180deg,var(--bg) 75%,rgba(20,17,14,.6));backdrop-filter:blur(8px);z-index:20}
+  .logo{width:36px;height:36px;border-radius:11px;flex:0 0 auto;position:relative;background:conic-gradient(from 210deg,#c8742a,#e0913a 40%,#f0b56a 60%,#c8742a);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 0 22px rgba(224,145,58,.26)}
+  .logo::after{content:'';position:absolute;inset:11px;border-radius:50%;background:var(--bg)}
+  .brand{font-size:18px;font-weight:800;letter-spacing:-.02em}
+  .brand small{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-top:1px}
+  nav{margin-left:auto;display:flex;gap:8px}
+  nav a{font-size:13px;font-weight:700;color:var(--ink);text-decoration:none;padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card-2)}
+  nav a.cta{background:linear-gradient(135deg,var(--amber),#c8742a);border-color:var(--amber);color:#1a1305}
+  main{max-width:880px;margin:0 auto;padding:24px 20px}
+
+  .hero{background:linear-gradient(135deg,#2a2014,#1d1610);border:1px solid var(--line);border-radius:20px;padding:34px 26px;margin-bottom:30px;position:relative;overflow:hidden}
+  .hero::after{content:'';position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(224,145,58,.22),transparent 70%)}
+  .hero h1{font-size:28px;font-weight:800;letter-spacing:-.03em;line-height:1.3;margin-bottom:12px;position:relative}
+  .hero p{color:var(--muted);font-size:15px;max-width:540px;position:relative}
+  .hero .btns{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;position:relative}
+  .hero a{text-decoration:none;font-weight:800;font-size:14.5px;padding:13px 22px;border-radius:12px}
+  .hero a.p{background:linear-gradient(135deg,var(--amber),#c8742a);color:#1a1305}
+  .hero a.s{background:var(--card-2);border:1px solid var(--line);color:var(--ink)}
+
+  .sec-label{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:30px 2px 14px;display:flex;align-items:center;gap:10px}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--line)}
+
+  .posts{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .post{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;text-decoration:none;color:var(--ink);transition:.16s;display:flex;flex-direction:column}
+  .post:hover{border-color:#4a4136;transform:translateY(-2px)}
+  .post .cat{font-size:10.5px;font-weight:800;letter-spacing:.06em;color:#1a1305;padding:3px 9px;border-radius:6px;align-self:flex-start;margin-bottom:12px}
+  .post h3{font-size:17px;font-weight:800;letter-spacing:-.01em;line-height:1.4;margin-bottom:8px}
+  .post p{font-size:13.5px;color:var(--muted);line-height:1.6;flex:1}
+  .post .more{font-size:12.5px;font-weight:700;color:var(--amber-soft);margin-top:14px}
+
+  .tool-card{background:linear-gradient(135deg,#241a10,#1d1610);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-top:14px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+  .tool-card .ic{width:54px;height:54px;border-radius:15px;flex:0 0 auto;background:radial-gradient(circle at 35% 30%,#e85d2c,#a8351f 70%);display:grid;place-items:center}
+  .tool-card .ic svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:2}
+  .tool-card .tx{flex:1;min-width:200px}
+  .tool-card h3{font-size:18px;font-weight:800;margin-bottom:5px}
+  .tool-card p{color:var(--muted);font-size:14px}
+  .tool-card a{text-decoration:none;background:linear-gradient(135deg,var(--amber),#c8742a);color:#1a1305;font-weight:800;font-size:14.5px;padding:13px 24px;border-radius:12px;white-space:nowrap}
+
+  footer{max-width:880px;margin:0 auto;padding:30px 20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;line-height:1.9;margin-top:36px}
+  footer .links{margin-bottom:10px}
+  footer .links a{margin-right:16px;color:var(--amber-soft);text-decoration:none}
+
+  .adbar{position:relative;z-index:30;display:flex;align-items:center;gap:8px;padding:11px 12px;background:linear-gradient(90deg,#c8742a,#e0913a 50%,#c8742a);border-bottom:1px solid rgba(0,0,0,.25);box-shadow:0 2px 14px rgba(224,145,58,.3)}
+  .adwrap{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;min-width:0;flex-wrap:wrap;text-align:center}
+  .adtag{flex:0 0 auto;font-size:11px;font-weight:900;letter-spacing:.04em;color:#e0913a;background:#1a1305;padding:4px 10px;border-radius:7px}
+  .adtxt{font-size:14px;font-weight:800;color:#1a1305;letter-spacing:-.01em}
+  .adtxt a{color:#1a1305;font-weight:900;text-decoration:underline;text-underline-offset:2px}
+  .adtxt b{color:#1a1305;font-weight:900}
+  .adx{flex:0 0 auto;width:26px;height:26px;padding:0;border-radius:7px;background:rgba(26,19,5,.18);border:none;color:#1a1305;font-size:14px;font-weight:800;display:grid;place-items:center;cursor:pointer}
+  .adx:hover{background:rgba(26,19,5,.3)}
+</style>
+</head>
+<body>
+<div class="adbar" id="adbar">
+  <div class="adwrap">
+    <span class="adtag">선불폰 개통</span>
+    <span class="adtxt"><a href="tel:01074180705">010-7418-0705</a> · 카카오톡 <b>메이플통신</b></span>
+  </div>
+  <button class="adx" id="adx" title="닫기">✕</button>
+</div>
+
+<header>
+  <div class="logo"></div>
+  <div class="brand">무드<small>사진 색감 보정 도구 & 가이드</small></div>
+  <nav>
+    <a href="board.html">게시판</a>
+    <a class="cta" href="app14.html">보정 도구</a>
+  </nav>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>사진 색감, 버튼 한 번으로<br>분위기까지 바꾸세요</h1>
+    <p>음식·카페·풀빌라·야경. 상황에 맞는 색감을 골라 적용하고, 강조할 부분만 또렷하게 남기는 아웃포커싱까지. 설치 없이 브라우저에서 바로, 사진은 내 기기 안에서만 처리됩니다.</p>
+    <div class="btns">
+      <a class="p" href="app14.html">보정 시작하기</a>
+      <a class="s" href="guide.html">가이드 보기</a>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="ic"><svg viewBox="0 0 24 24"><path d="M21 15l-5-5L5 21"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div>
+    <div class="tx">
+      <h3>무드 보정 도구</h3>
+      <p>한식맛집·카페·풀빌라·야경 모드 + 나만의 색감 추가 + 아웃포커싱. 여러 장 한 번에.</p>
+    </div>
+    <a href="app14.html">도구 열기</a>
+  </div>
+
+  <div class="sec-label">사진 보정 가이드</div>
+  <div class="posts">
+    <a class="post" href="guide.html#food">
+      <span class="cat" style="background:#b5471f">음식 사진</span>
+      <h3>음식 사진을 먹음직스럽게 만드는 법</h3>
+      <p>어두운 배경에 음식을 띄우고, 붉은 양념과 노릇한 색을 살려 군침 도는 사진을 만드는 방법.</p>
+      <span class="more">읽기 →</span>
+    </a>
+    <a class="post" href="guide.html#cafe">
+      <span class="cat" style="background:#d8a15e">카페 사진</span>
+      <h3>카페 사진의 밝고 따뜻한 톤 만들기</h3>
+      <p>창가 자연광과 우드 톤을 살려 화사하고 아늑한 카페 무드를 만드는 보정 포인트.</p>
+      <span class="more">읽기 →</span>
+    </a>
+    <a class="post" href="guide.html#villa">
+      <span class="cat" style="background:#3f86c2">풀빌라·펜션</span>
+      <h3>풀빌라 사진을 시원하게 살리는 법</h3>
+      <p>파란 수영장과 초록 잔디를 또렷하게. 청량한 여름 휴양지 느낌을 만드는 색감 가이드.</p>
+      <span class="more">읽기 →</span>
+    </a>
+    <a class="post" href="guide.html#night">
+      <span class="cat" style="background:#5b4b8a">야경</span>
+      <h3>야경 사진을 깊고 분위기 있게</h3>
+      <p>어둠은 깊게, 불빛은 따뜻하게. 도시 야경과 간판을 분위기 있게 살리는 보정법.</p>
+      <span class="more">읽기 →</span>
+    </a>
+    <a class="post" href="guide.html#focus">
+      <span class="cat" style="background:#7fa86a">아웃포커싱</span>
+      <h3>아웃포커싱으로 주제를 강조하기</h3>
+      <p>음식 한 접시, 간판 하나에 시선을 집중시키는 배경 흐림 기법과 활용 팁.</p>
+      <span class="more">읽기 →</span>
+    </a>
+    <a class="post" href="guide.html#basics">
+      <span class="cat" style="background:#9a8a6a">기본기</span>
+      <h3>색감 보정이 매출까지 바꾸는 이유</h3>
+      <p>밝기·대비·색온도·채도. 보정의 기본 네 가지와, 사진이 손님을 부르는 원리.</p>
+      <span class="more">읽기 →</span>
+    </a>
+  </div>
+
+  <div class="sec-label">함께 만들어요</div>
+  <div class="tool-card">
+    <div class="ic" style="background:radial-gradient(circle at 35% 30%,#7fa86a,#3f6a3a 70%)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+    <div class="tx">
+      <h3>원하는 색감·기능을 요청하세요</h3>
+      <p>"이런 모드가 있으면 좋겠어요", "이 기능 추가해 주세요" 같은 의견을 게시판에 남겨 주세요.</p>
+    </div>
+    <a href="board.html">게시판 가기</a>
+  </div>
+</main>
+
+<footer>
+  <div class="links">
+    <a href="guide.html">가이드</a>
+    <a href="app14.html">보정 도구</a>
+    <a href="board.html">게시판</a>
+    <a href="privacy.html">개인정보처리방침</a>
+    <a href="terms.html">이용약관</a>
+    <a href="contact.html">문의</a>
+  </div>
+  무드(Mood)는 음식·카페·여행 사진을 위한 색감 보정 도구입니다. 모든 사진은 사용자의 기기 안에서만 처리되며 외부로 전송되지 않습니다.<br>
+  선불폰 개통 문의: 010-7418-0705 · 카카오톡 메이플통신
+</footer>
+<script>(function(){var x=document.getElementById('adx');if(x)x.onclick=function(){document.getElementById('adbar').style.display='none';};})();</script>
+</body>
+</html>
